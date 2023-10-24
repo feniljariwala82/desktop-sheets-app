@@ -1,0 +1,141 @@
+{
+  "name": "desktop-sheet-app",
+  "version": "0.0.1",
+  "description": "Desktop sheet app",
+  "main": "dist/main/app.js",
+  "license": "UNLICENSED",
+  "author": {
+    "name": "Fenil Jariwala",
+    "email": "it@origiins.co",
+    "url": "https://www.origiins.co/"
+  },
+  "copyright": "Copyright © 2023 ${author}",
+  "scripts": {
+    "type:check": "cd ./main && tsc --noEmit",
+    "compile:main": "yarn type:check && cd ./main && tsc",
+    "compile:main:watch": "cd ./main && tsc --watch",
+    "compile:renderer": "cd renderer/ && yarn build && cd .. && node scripts/moveBuiltRendererToDist.js && node scripts/updateIndexHtml.js",
+    "compile:all": "concurrently \"yarn compile:main\" \"yarn compile:renderer\"",
+    "eslint:main": "eslint main/**",
+    "start:main": "electronmon .",
+    "start:renderer": "cd renderer/ && yarn dev",
+    "dev": "yarn clean:dist && yarn compile:main && yarn start",
+    "start": "concurrently \"yarn compile:main:watch\" \"yarn start:renderer\" \"yarn start:main\"",
+    "postinstall": "electron-builder install-app-deps",
+    "obfuscate:main": "javascript-obfuscator ./dist/main --output ./dist/obfuscated && node scripts/renameObfuscatedDir.js",
+    "clean:all": "concurrently \"yarn clean:release\" \"yarn clean:dist\"",
+    "clean:dist": "node scripts/clearDist.js",
+    "clean:release": "node scripts/clearRelease.js",
+    "build:source": "concurrently \"yarn clean:all\" \"yarn type:check\" \"yarn eslint:main\" && yarn compile:all && yarn obfuscate:main",
+    "build:electron": "electron-builder build --publish never",
+    "make": "yarn build:source && yarn build:electron",
+    "check:package:updates": "npx npm-check-updates -i",
+    "format:check": "yarn prettier . --check",
+    "format:write": "yarn prettier . --write",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "dependencies": {
+    "electron-devtools-installer": "^3.2.0",
+    "electron-log": "^4.4.8",
+    "electron-updater": "6.1.4"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.8.0",
+    "@typescript-eslint/parser": "^6.8.0",
+    "concurrently": "^8.2.2",
+    "electron": "^27.0.2",
+    "electron-builder": "^24.6.4",
+    "electron-notarize": "^1.2.2",
+    "electronmon": "^2.0.2",
+    "eslint": "^8.52.0",
+    "husky": "^8.0.3",
+    "javascript-obfuscator": "^4.1.0",
+    "lint-staged": "^15.0.2",
+    "prettier": "3.0.3",
+    "typescript": "5.2.2"
+  },
+  "electronmon": {
+    "patterns": [
+      "!main/**",
+      "!node_modules",
+      "!scripts/**",
+      "!renderer/**",
+      "!tsconfig.json",
+      "!yarn.lock"
+    ]
+  },
+  "build": {
+    "asar": "true",
+    "asarUnpack": "**\\*.{node,dll}",
+    "appId": "com.your-domain.your-app-name",
+    "productName": "Sheets",
+    "artifactName": "Sheets-${version}.${ext}",
+    "generateUpdatesFilesForAllChannels": true,
+    "detectUpdateChannel": true,
+    "directories": {
+      "buildResources": "assets",
+      "output": "release/"
+    },
+    "extraResources": [
+      "assets",
+      "binaries"
+    ],
+    "afterSign": "./scripts/notarize.js",
+    "files": [
+      "dist/**/*"
+    ],
+    "mac": {
+      "target": {
+        "target": "dmg",
+        "arch": [
+          "x64"
+        ]
+      },
+      "category": "public.app-category.utilities",
+      "type": "distribution",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist"
+    },
+    "dmg": {
+      "contents": [
+        {
+          "x": 130,
+          "y": 220
+        },
+        {
+          "x": 410,
+          "y": 220,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "deleteAppDataOnUninstall": true,
+      "oneClick": true,
+      "perMachine": true,
+      "runAfterFinish": true
+    },
+    "linux": {
+      "target": [
+        "AppImage"
+      ],
+      "category": "Utility"
+    }
+  }
+}

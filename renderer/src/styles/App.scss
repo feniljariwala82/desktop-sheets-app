@@ -1,0 +1,41 @@
+@import "constants";
+
+// using ubuntu font
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+
+// importing sync fusion scss
+@import "../../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-grids/styles/material.css";
+@import "../../node_modules/@syncfusion/ej2-react-spreadsheet/styles/material.css";
+
+body {
+  font-family: "Ubuntu", sans-serif;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
+
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+#draggable {
+  -webkit-user-select: none;
+  -webkit-app-region: drag;
+}
+
+#notDraggable {
+  -webkit-app-region: no-drag;
+}

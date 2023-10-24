@@ -1,0 +1,13 @@
+# Ignore artifacts:
+assets
+database
+dev
+dist
+node_modules
+yarn.*
+.vscode
+
+# renderer 
+renderer/node_modules
+renderer/public
+renderer/yarn.lock
