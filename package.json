@@ -90,7 +90,13 @@
     ],
     "mac": {
       "identity": "Developer ID Application: Your Name",
-      "target": "mas",
+      "target": {
+        "target": "mas",
+        "arch": [
+          "x64",
+          "arm64"
+        ]
+      },
       "category": "public.app-category.utilities",
       "type": "distribution",
       "hardenedRuntime": true,
