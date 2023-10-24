@@ -39,12 +39,12 @@
   },
   "dependencies": {
     "electron-devtools-installer": "^3.2.0",
-    "electron-log": "^4.4.8",
+    "electron-log": "^5.0.0",
     "electron-updater": "6.1.4"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^6.8.0",
-    "@typescript-eslint/parser": "^6.8.0",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "@typescript-eslint/parser": "^6.9.0",
     "concurrently": "^8.2.2",
     "electron": "^27.0.2",
     "electron-builder": "^24.6.4",

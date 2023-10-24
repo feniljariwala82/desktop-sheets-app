@@ -23,7 +23,7 @@ const DIRECTORY = path.join(__dirname, "..", "dist", "renderer");
 
     const contentSecurityPolicyTag = `
       <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-      <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:* https://fonts.googleapis.com; script-src 'self'; img-src 'self' http://localhost:* data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com data:;">
+      <meta http-equiv="Content-Security-Policy" content="default-src 'self' http://localhost:* https://fonts.googleapis.com; script-src 'self'; img-src 'self' http://localhost:* data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;">
     `;
 
     fileString = fileString.replace(

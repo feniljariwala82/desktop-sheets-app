@@ -49,7 +49,7 @@ const createWindow = () => {
     title: "Sheets",
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
-      devTools: true,
+      devTools: !app.isPackaged,
     },
     center: true,
     minWidth: minWidth, // set a min width
@@ -74,14 +74,15 @@ const createWindow = () => {
   }
 
   if (!app.isPackaged) {
-    mainWindow.maximize();
     // open the DevTools
     mainWindow.webContents.openDevTools({ mode: "right" });
   } else {
+    // disabling menu bar
     mainWindow.setMenuBarVisibility(false);
-    mainWindow.setSize(minWidth, minHeight, true);
-    mainWindow.center();
   }
+
+  // maximizing app window on open
+  mainWindow.maximize();
 
   /**
    * load short cuts
