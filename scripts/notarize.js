@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
+require("dotenv").config();
 const { notarize } = require("electron-notarize");
 const { build } = require("../package.json");
 

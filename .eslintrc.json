@@ -25,6 +25,7 @@
     "renderer",
     "scripts",
     "./utils",
-    "knexfile.js"
+    "knexfile.js",
+    "builder.js"
   ]
 }
