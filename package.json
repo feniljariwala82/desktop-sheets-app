@@ -1,6 +1,6 @@
 {
-  "name": "desktop-sheet-app",
-  "version": "0.0.1",
+  "name": "spreadsheets7",
+  "version": "1.0.0",
   "description": "Desktop sheet app",
   "main": "dist/main/app.js",
   "license": "UNLICENSED",
@@ -70,9 +70,10 @@
   "build": {
     "asar": "true",
     "asarUnpack": "**\\*.{node,dll}",
-    "appId": "com.your-domain.your-app-name",
-    "productName": "Sheets",
-    "artifactName": "Sheets-${version}.${ext}",
+    "appId": " com.smmservice.spreadsheets",
+    "productName": "Spreadsheets 7",
+    "buildVersion": "1.0.0",
+    "buildNumber": 1,
     "generateUpdatesFilesForAllChannels": true,
     "detectUpdateChannel": true,
     "directories": {
@@ -88,32 +89,14 @@
       "dist/**/*"
     ],
     "mac": {
-      "target": {
-        "target": "dmg",
-        "arch": [
-          "x64"
-        ]
-      },
+      "identity": "Developer ID Application: Your Name",
+      "target": "mas",
       "category": "public.app-category.utilities",
       "type": "distribution",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "assets/entitlements.mac.plist",
       "entitlementsInherit": "assets/entitlements.mac.plist"
-    },
-    "dmg": {
-      "contents": [
-        {
-          "x": 130,
-          "y": 220
-        },
-        {
-          "x": 410,
-          "y": 220,
-          "type": "link",
-          "path": "/Applications"
-        }
-      ]
     },
     "win": {
       "target": [
